@@ -1,4 +1,3 @@
 #!/usr/bin/python3
-import random
-number = random.uniform(-10000, 10000)
-print(f"Float: {number:.2f}")
+str = "Holberton School"
+print((str + '\n') * 3, str[:9], sep='\n')
