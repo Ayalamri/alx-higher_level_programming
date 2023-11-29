@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get the Python file name from the environment variable
+PY_FILE="$PYFILE"
+
+# Check if the Python file exists
+if [ -f "$PY_FILE" ]; then
+    # Compile the Python script and output the bytecode to a file with the ".pyc" extension
+    python3 -m compileall "$PY_FILE"
+    echo "Compilation successful. Bytecode saved to ${PY_FILE}c"
+else
+    echo "Error: Python file not found."
+fi
