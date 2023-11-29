@@ -1,4 +1,4 @@
 #!/usr/bin/python3
-import sys
-sys.stderr.write("and that piece of art is useful - Dora Korpar, 2015-10-19\n")
-sys.exit(1)
+for i in range(ord('z'), ord('A') - 1, -2):
+    print("{}".format(chr(i)), end='')
+    print("{}".format(chr(i - 33)), end='')
