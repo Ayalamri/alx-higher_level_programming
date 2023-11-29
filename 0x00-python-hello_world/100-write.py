@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-for i in range(ord('z'), ord('A') - 1, -2):
-    print("{}".format(chr(i)), end='')
-    print("{}".format(chr(i - 25)), end='')
+import sys
 
-print()
+sys.stderr.write("and that piece of art is useful - Dora Korpar, 2015-10-19\n")
+sys.exit(1)
