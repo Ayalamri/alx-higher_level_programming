@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+def islower(c):
+    return ord('a') <= ord(c) <= ord('z')
 islower = __import__('7-islower').islower
 
 print("a is {}".format("lower" if islower("a") else "upper"))
