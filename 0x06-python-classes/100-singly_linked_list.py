@@ -50,3 +50,18 @@ class SinglyLinkedList:
             result += str(current.data) + "\n"
             current = current.next_node
         return result[:-1]
+
+if __name__ == "__main__":
+    sll = SinglyLinkedList()
+    sll.sorted_insert(2)
+    sll.sorted_insert(5)
+    sll.sorted_insert(3)
+    sll.sorted_insert(10)
+    sll.sorted_insert(1)
+    sll.sorted_insert(-4)
+    sll.sorted_insert(-3)
+    sll.sorted_insert(4)
+    sll.sorted_insert(5)
+    sll.sorted_insert(12)
+    sll.sorted_insert(3)
+    print(sll)
