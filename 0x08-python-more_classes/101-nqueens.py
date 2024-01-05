@@ -23,11 +23,11 @@ def solve_nqueens(board, row, n):
 
 def nqueens(n):
     if not isinstance(n, int):
-        print("N must be a number")
+        print("N must be a number", file=sys.stderr)
         sys.exit(1)
 
     if n < 4:
-        print("N must be at least 4")
+        print("N must be at least 4", file=sys.stderr)
         sys.exit(1)
 
     board = [-1] * n
@@ -35,12 +35,12 @@ def nqueens(n):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: nqueens N")
+        print("Usage: nqueens N", file=sys.stderr)
         sys.exit(1)
 
     try:
         n = int(sys.argv[1])
         nqueens(n)
     except ValueError:
-        print("N must be a number")
+        print("N must be a number", file=sys.stderr)
         sys.exit(1)
