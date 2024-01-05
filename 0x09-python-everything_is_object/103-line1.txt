@@ -1,1 +1,1 @@
-The execution of the first line creates 1 int object.
+1 int object is created.
