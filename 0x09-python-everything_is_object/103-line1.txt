@@ -1,1 +1,1 @@
-1 int object is created.
+0
