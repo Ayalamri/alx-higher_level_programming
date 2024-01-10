@@ -1,38 +1,50 @@
 #!/usr/bin/python3
-'''Script for computing metrics from stdin.'''
+"""
+Script to compute metrics from stdin
+"""
 
+import signal
 import sys
 
-def print_stats(total_size, status_codes):
-    '''Prints statistics.'''
+def print_metrics(total_size, status_counts):
+    """
+    Print metrics based on the total size and status counts.
+    """
     print("File size: {}".format(total_size))
-    for code in sorted(status_codes.keys()):
-        print("{}: {}".format(code, status_codes[code]))
+    for status_code in sorted(status_counts.keys()):
+        print("{}: {}".format(status_code, status_counts[status_code]))
 
-def main():
-    '''Main function to compute and print statistics.'''
-    total_size = 0
-    status_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
-                    "403": 0, "404": 0, "405": 0, "500": 0}
-    count = 0
+def signal_handler(sig, frame):
+    """
+    Handle keyboard interruption (CTRL + C) to print metrics.
+    """
+    print_metrics(total_size, status_counts)
+    sys.exit(0)
 
-    try:
-        for line in sys.stdin:
-            try:
-                parts = line.split()
-                total_size += int(parts[-1])
-                status_code = parts[-2]
-                if status_code in status_codes:
-                    status_codes[status_code] += 1
-            except Exception:
-                pass
+# Register the signal handler for keyboard interruption
+signal.signal(signal.SIGINT, signal_handler)
 
-            count += 1
-            if count % 10 == 0:
-                print_stats(total_size, status_codes)
+# Initialize variables to keep track of metrics
+total_size = 0
+status_counts = {}
 
-    except KeyboardInterrupt:
-        print_stats(total_size, status_codes)
+try:
+    # Read stdin line by line
+    for i, line in enumerate(sys.stdin, 1):
+        # Parse the line to extract status code and file size
+        parts = line.split()
+        status_code = parts[-2]
+        file_size = int(parts[-1])
 
-if __name__ == "__main__":
-    main()
+        # Update metrics
+        total_size += file_size
+        status_counts[status_code] = status_counts.get(status_code, 0) + 1
+
+        # Print metrics every 10 lines
+        if i % 10 == 0:
+            print_metrics(total_size, status_counts)
+
+except KeyboardInterrupt:
+    # Handle keyboard interruption to print final metrics
+    print_metrics(total_size, status_counts)
+    sys.exit(0)
